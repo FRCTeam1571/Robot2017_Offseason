@@ -18,20 +18,18 @@ class MyRobot(wpilib.SampleRobot):
         self.rr_motor = ctre.CANTalon(3)
         self.fl_motor = ctre.CANTalon(0)
         self.rl_motor = ctre.CANTalon(1)
-        
+        self.climber = ctre.CANTalon(5)
+        self.intake = ctre.CANTalon(7)
+
+
+
         self.rr_motor.changeControlMode(self.rr_motor.ControlMode.Follower)
         self.rr_motor.set(self.fr_motor.getDeviceID())
         self.rl_motor.changeControlMode(self.rl_motor.ControlMode.Follower)
         self.rl_motor.set(self.fl_motor.getDeviceID())
 
 
-        self.robot_drive = wpilib.RobotDrive(self.fl_motor, self.fr_motor,
-                                             self.rr_motor, self.rl_motor)
-
-
-
-
-
+        self.robot_drive = wpilib.RobotDrive(self.fl_motor, self.fr_motor)
 
 
         # Position gets automatically updated as robot moves
@@ -67,6 +65,30 @@ class MyRobot(wpilib.SampleRobot):
         while self.isOperatorControl() and self.isEnabled():
 
             self.robot_drive.arcadeDrive(self.lstick)
+
+            self.climbButtonResult = self.lstick.getRawButton(5)
+            if self.climbButtonResult:
+                self.climber.set(-0.25)
+            else:
+                self.climber.set(0)
+
+            self.pov = self.lstick.getPOV()
+            if self.pov > 135.0:
+                self.intake.set(-0.25)
+            elif self.pov > 315.0:
+                self.intake.set(0.25)
+            else:
+                self.intake.set(0)
+
+            self.pov = self.lstick.getPOV()
+            if self.pov > 135.0:
+                self.intake.set(-0.25)
+            elif self.pov > 315.0:
+                self.intake.set(0.25)
+            else:
+                self.intake.set(0)
+
+
 
             wpilib.Timer.delay(0.04)
 
