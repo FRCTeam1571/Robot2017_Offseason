@@ -7,3 +7,7 @@ def two_plus(arg):
 
 def test_addition():
     assert two_plus(2) == 4
+
+# py -3 -m pip install pyfrc
+# py -3 -m pip install robotpy-ctre
+# py -3 -m pip install pygame
