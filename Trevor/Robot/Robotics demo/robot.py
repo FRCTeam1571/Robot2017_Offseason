@@ -20,6 +20,8 @@ class MyRobot(wpilib.SampleRobot):
         self.rl_motor = ctre.CANTalon(1)
         self.climber = ctre.CANTalon(5)
         self.intake = ctre.CANTalon(7)
+        self.shooter = ctre.CANTalon(8)
+        self.feeder = ctre.CANTalon(6)
 
 
 
@@ -72,22 +74,24 @@ class MyRobot(wpilib.SampleRobot):
             else:
                 self.climber.set(0)
 
-            self.pov = self.lstick.getPOV()
-            if self.pov > 135.0:
+
+            self.intakecw = self.lstick.getRawButton(6)
+            self.intakecc = self.lstick.getRawButton(4)
+            if self.intakecw:
                 self.intake.set(-0.25)
-            elif self.pov > 315.0:
+            elif self.intakecc:
                 self.intake.set(0.25)
             else:
                 self.intake.set(0)
 
-            self.pov = self.lstick.getPOV()
-            if self.pov > 135.0:
-                self.intake.set(-0.25)
-            elif self.pov > 315.0:
-                self.intake.set(0.25)
+            self.rapid = self.lstick.getRawButton(1)
+            self.single = self.lstick.getRawButton(2)
+            if self.rapid:
+                self.shooter.set(0.5)
+                self.feeder.set(0.5)
             else:
-                self.intake.set(0)
-
+                self.shooter.set(0)
+                self.feeder.set(0)
 
 
             wpilib.Timer.delay(0.04)
