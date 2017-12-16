@@ -18,6 +18,7 @@ class MyRobot(wpilib.SampleRobot):
         self.rr_motor = ctre.CANTalon(3)
         self.fl_motor = ctre.CANTalon(0)
         self.rl_motor = ctre.CANTalon(1)
+
         self.climber = ctre.CANTalon(5)
         self.intake = ctre.CANTalon(7)
         self.shooter = ctre.CANTalon(8)
