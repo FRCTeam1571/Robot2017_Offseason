@@ -3,6 +3,7 @@
 
 import wpilib
 import ctre
+from networktables import networktables
 
 
 class MyRobot(wpilib.SampleRobot):
@@ -37,6 +38,11 @@ class MyRobot(wpilib.SampleRobot):
 
         # Position gets automatically updated as robot moves
         self.gyro = wpilib.AnalogGyro(1)
+
+        Networktables.initialize(server='roborio-1571-frc.local')
+
+        sd = Networktables.getTable('SmartDashboard')
+
 
     def disabled(self):
         '''Called when the robot is disabled'''
@@ -89,6 +95,7 @@ class MyRobot(wpilib.SampleRobot):
             self.single = self.lstick.getRawButton(2)
             if self.rapid:
                 self.shooter.set(0.5)
+                sd.putNumber('shooterValue', self.shooter.get())
                 self.feeder.set(0.5)
             else:
                 self.shooter.set(0)
