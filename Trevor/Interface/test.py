@@ -2,7 +2,7 @@ import os
 
 os.chdir('..')
 files = str(os.listdir())
-dirs = str(os.walk(top))
+# dirs = str(os.walk())
 
 
 files = files.replace(' ', '\b')

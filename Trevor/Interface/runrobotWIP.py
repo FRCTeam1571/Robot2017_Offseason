@@ -45,9 +45,10 @@ def target_file():
     if  ext not in fn:
         fn = fn+ext
 
-    print("let program search for file path? [y/n]")
+    print("Is the program in this folder? [y/n]")
     fpq = input(": ")
     if fpq.lower() == 'n':
+        os.chdir
         fpath = input("enter file path: ")
     else:
         fpath = os.path.join(os.path.dirname(__file__))
