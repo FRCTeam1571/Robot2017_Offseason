@@ -4,7 +4,7 @@
 import os
 import platform  # this is to detect the operating system for cross-platform compatibility
 
-
+os.system('color f9')
 class RAGE:
     """ this is to be ran when an error occurs due to an incomplete feature, a known bug, or just some random *insert
     loud bleep noise that hurts all of our ears and we all know what they say but its still
@@ -27,10 +27,10 @@ class Statics:
         """
         this is used to add the line break. its just to save writing code
         """
-        print('========================================\n')
-        print('ʕ•ᴥ•ʔ  ~Rawr')
-        print('     | A Message From a Very Nice Bear |\n')
-        print('========================================\n \n')
+        print('')
+        print('')
+        print('')
+        print('')
 
 
 def target_file():
@@ -64,18 +64,18 @@ def target_file():
 
 def platCheck():
     """ allows for cross-platform support though the assignment of variables """
-    global clear #`global` lets you use `clear` everywhere after you call `platCheck()`
+    global clear
     platname = platform.system()
     if platname == 'Linux':
         clear = 'clear'
         # Linux
 
     elif platname == 'Darwin':
-        clear = "clear"
+        clear = 'clear'
         #This is experimental. None of us know how to use OSX or have it.
         # MAC OS X
 
-    elif platform.system() == 'Windows':
+    elif platname == 'Windows':
         clear = 'cls'
         # Windows
 
@@ -86,13 +86,13 @@ def platCheck():
         print("C. Windows")
         osq = input(": ")
         if osq == "A" or osq == "a":
-            clear = "clear"
+            clear = 'clear'
         if osq == "B" or osq == "b":
-            clear = "clear"
+            clear = 'clear'
         if osq == "C" or osq == "c":
-            clear = "cls"
+            clear = 'cls'
     return clear
-
+clear = 'cls'
 platCheck() #Called for testing
 os.system(clear)
 
@@ -100,6 +100,7 @@ print("\n \n \n \n Welcome to the CALibrate Robotics Robot UI\n")
 Statics.brk()
 
 target_file()
+
 
 """ THE LAND OF STUFF TO DO """
 # TODO search for file name in super, child, and current dir [use current as primary]
