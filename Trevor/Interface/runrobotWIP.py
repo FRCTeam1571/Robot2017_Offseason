@@ -5,18 +5,12 @@ import os
 import platform  # this is to detect the operating system for cross-platform compatibility
 
 os.system('color f9')
-class RAGE:
-    """ this is to be ran when an error occurs due to an incomplete feature, a known bug, or just some random *insert
-    loud bleep noise that hurts all of our ears and we all know what they say but its still
-    here for some annoying reason. i mean, just let the man cuss dude*
-    returns nothing. ABSOLUTELY NOTHING!
-    """
 
-    @staticmethod
-    def rageQuit():
-        """ this is to express rage when the program breaks. stops it in a RAGE """
-        print("¬_¬   ┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻   ლ(ಠ益ಠლ)")
-        quit()
+@staticmethod
+def error():
+    """ this is used when the program breaks or for stopping the command prompt from closing. """
+    print("")
+    input("Press Enter")
 
 
 class Statics:
@@ -40,26 +34,30 @@ def target_file():
     :returns: file path of robot file
     :rtype: str
     """
-    print("please input file name [should be 'robot.py'. you may click enter for the default")
-    file = input(":  ")
+    global fn, fpath
+    print("please input file name [should be 'robot.py'. you may click enter for the default}")
+    fn = input(":  ")
 
-    if file is "":
-        file = "robot.py"
+    if fn is "":
+        fn = "robot.py"
 
     ext = ".py" #Checks for .py file extension
-    if  ext not in file:
-        file = fn+ext
+    if  ext not in fn:
+        fn = fn+ext
 
     print("let program search for file path? [y/n]")
     fpq = input(": ")
-    if fpq == "N" or fpq == "n":
+    if fpq.lower() == 'n':
         fpath = input("enter file path: ")
     else:
-        fpath = os.path.join(os.path.dirname(__file__), file)
+        fpath = os.path.join(os.path.dirname(__file__))
 
     print(fpath)
     Statics.brk()
-    return fpath
+    return (fn, fpath)
+
+def run_mode():
+    pass
 
 
 def platCheck():
@@ -92,7 +90,6 @@ def platCheck():
         if osq == "C" or osq == "c":
             clear = 'cls'
     return clear
-clear = 'cls'
 platCheck() #Called for testing
 os.system(clear)
 
@@ -100,6 +97,8 @@ print("\n \n \n \n Welcome to the CALibrate Robotics Robot UI\n")
 Statics.brk()
 
 target_file()
+os.chdir(fpath)
+run_mode()
 
 
 """ THE LAND OF STUFF TO DO """
