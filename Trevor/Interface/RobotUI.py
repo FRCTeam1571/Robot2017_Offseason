@@ -1,21 +1,21 @@
 import os #imports os module
 
 os.system("cls")
-os.system("color F0")
+os.system("color F9")
 #Unnecessary ASCII Art
-print("   _____          _      _____ ____  _____         _______ ______      ")
-print("  / ____|   /\   | |    |_   _|  _ \|  __ \     /\|__   __|  ____|     ")
-print(" | |       /  \  | |      | | | |_) | |__) |   /  \  | |  | |__        ")
-print(" | |      / /\ \ | |      | | |  _ <|  _  /   / /\ \ | |  |  __|       ")
-print(" | |____ / ____ \| |____ _| |_| |_) | | \ \  / ____ \| |  | |____      ")
-print("  \_____/_/    \_\______|_____|____/|_|__\_\/_/____\_\_|_ |______|____ ")
-print("                 |  __ \ / __ \|  _ \ / __ \__   __|_   _/ ____|/ ____|")
-print("                 | |__) | |  | | |_) | |  | | | |    | || |    | (___  ")
-print("                 |  _  /| |  | |  _ <| |  | | | |    | || |     \___ \ ")
-print("                 | | \ \| |__| | |_) | |__| | | |   _| || |____ ____) |")
-print("                 |_|  \_\\\____/|____/ \____/  |_|  |_____\_____|_____/ ")
+print(r"   _____          _      _____ ____  _____         _______ ______      ")
+print(r"  / ____|   /\   | |    |_   _|  _ \|  __ \     /\|__   __|  ____|     ")
+print(r" | |       /  \  | |      | | | |_) | |__) |   /  \  | |  | |__        ")
+print(r" | |      / /\ \ | |      | | |  _ <|  _  /   / /\ \ | |  |  __|       ")
+print(r" | |____ / ____ \| |____ _| |_| |_) | | \ \  / ____ \| |  | |____      ")
+print(r"  \_____/_/    \_\______|_____|____/|_|__\_\/_/____\_\_|_ |______|____ ")
+print(r"                 |  __ \ / __ \|  _ \ / __ \__   __|_   _/ ____|/ ____|")
+print(r"                 | |__) | |  | | |_) | |  | | | |    | || |    | (___  ")
+print(r"                 |  _  /| |  | |  _ <| |  | | | |    | || |     \___ \ ")
+print(r"                 | | \ \| |__| | |_) | |__| | | |   _| || |____ ____) |")
+print(r"                 |_|  \_\\____/|____/ \____/  |_|  |_____\_____|_____/ ")
 print("Welcome to the CALibrate Robotics Robot UI")
-print("Setup")
+print("Best if run in Command Prompt")
 print("------------------------------------------------------------------")
 
 
@@ -23,10 +23,10 @@ fp = input("File Path: ")
 fn = input("File Name: ")
 
 ext = ".py" #Checks to see if file has a .py extention
-if ext not in fn:
-    ta = input("Is this file a Python file (.py)? [Y/N]")
-    if ta == "Y" or ta == "y":
-        fn = fn+ext
+if fn == '':
+    fn = 'robot.py'
+elif ext not in fn:
+    fn = fn+ext
 
 def ri():
     print("Run In:")
@@ -55,7 +55,7 @@ def deploy():
 
     def test():
         stq = input("Skip tests? Default: Off [Y/N]") #Skip Test Question
-        if stq == "Y" or stq == "y":
+        if stq.lower() == "y":
             st = "--skip-tests"
         else:
             st = ""
@@ -64,7 +64,7 @@ def deploy():
 
     def netcode():
         ncq = input("Use Netcode (feedback)? Default: On [Y/N]") #Netcode Question
-        if ncq == "Y" or ncq == "y":
+        if ncq.lower() == "y":
             nc = "--nc"
         else:
             nc = ""
@@ -73,7 +73,7 @@ def deploy():
 
     def delete():
         depq = input("Delete Config? [Y/N]") #Config Question
-        if depq == "Y" or depq == "y":
+        if depq.lower() == "y":
             print("Are you sure you want to delete previous settings?")
             print("If so type 'delete', If not press Enter")
             delprompt = input("")
@@ -96,18 +96,18 @@ def deploy():
         print("C. Delete Config File")
         print("D. Exit Settings")
         goto = input("Type Letter: ")
-        if goto == "A" or goto == "a":
+        if goto.lower() == 'a':
             netcode()
             go()
 
-        elif goto == "B" or goto == "b":
+        elif goto.lower() == 'b':
             test()
             go()
 
-        elif goto == "C" or goto == "c":
+        elif goto.lower() == 'c':
             delete()
             go()
-        elif goto == "D" or goto == "d":
+        elif goto.lower() == 'd':
             deploy()
         else:
             head("")
@@ -117,9 +117,9 @@ def deploy():
     print("A. Start")
     print("B. Settings")
     opt = input("Type Letter: ")
-    if opt == "A" or opt == "a":
+    if opt.lower() == 'a':
         return
-    elif opt == "B" or opt == "b":
+    elif opt.lower() == 'b':
         os.system("cls")
         head("No Updates")
         go()
@@ -131,35 +131,24 @@ def deploy():
 nc = ""
 st = ""
 if rn == "deploy":
-    nc = "--nc"
     deploy()
-
-pyq = input("Do you have pyfrc and pygame installed? [Y/N]")
-if pyq == "N" or pyq == "n":
-    print("Downloading pyfrc and pygame...")
-    os.system("py -3 -m pip install pyfrc") #downloads pyfrc
-    os.system("py -3 -m pip install pygame") #downloads pygame
 
 os.chdir(fp) #Changes to directory
 
 while True:
     os.system("cls")
     print("CALibrate Robotics Robot UI "+fp+"\\"+fn)
-    print("Setup Complete")
-    print("")
-    print("------------------------------------------------------------------")
-    print("")
+    print("Setup Complete\n")
+    print("------------------------------------------------------------------\n")
 
     ans = input("Start the Robot? [Y/N]")
-    if ans == "Y" or ans == "y":
+    if ans.lower() == 'y':
         print("Starting...")
         '''Types this in cmd line'''
         os.system("py -3 "+fn+" "+rn+" "+nc+" "+st)
         input("Press Enter to Resume")
-    elif ans == "N" or ans =="n":
+    else:
         qu = input("Do you want to quit? [Y/N]")
-        if qu == "Y" or qu == "y":
+        if qu.lower() == "y":
             exit() #exits the program
-#Wow you made it to the end.
-#Todo: Make a menu for the simulator
 #Made by Trevor- Team 1571
