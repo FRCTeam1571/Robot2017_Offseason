@@ -142,7 +142,7 @@ while True:
     print("------------------------------------------------------------------\n")
 
     ans = input("Start the Robot? [Y/N]")
-    if ans.lower() == 'y':
+    if ans.lower() == 'y' or ans == '':
         print("Starting...")
         '''Types this in cmd line'''
         os.system("py -3 "+fn+" "+rn+" "+nc+" "+st)
